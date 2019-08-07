@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<sandtree>
+	<node refinement="sequential">
+		<label>EavesdropFrom
+Y:ECU</label>
+		<node refinement="conjunctive">
+			<label>Compromise
+Y:ECU</label>
+		</node>
+		<node refinement="conjunctive">
+			<label>CollectDataFrom
+Y:ECU</label>
+		</node>
+	</node>
+</sandtree>

@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<sandtree>
+	<node refinement="conjunctive">
+		<label>Eavesdrop
+X:CAN</label>
+		<node refinement="conjunctive">
+			<label>Eavesdrop
+Y:ECU/X:CAN</label>
+		</node>
+	</node>
+</sandtree>
