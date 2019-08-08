@@ -4,7 +4,7 @@
 		<label>Eavesdrop
 X:CAN</label>
 		<node refinement="conjunctive">
-			<label>Eavesdrop
+			<label>EavesdropFrom
 Y:ECU/X:CAN</label>
 		</node>
 	</node>

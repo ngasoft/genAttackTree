@@ -1,5 +1,6 @@
 import copy
 import data
+import xml.etree.ElementTree as ET
 
 def genAT(library, model):
     tree = copy.deepcopy(library[0])
@@ -20,11 +21,12 @@ def genAT(library, model):
             for assignment in assignments:
                 cleaf = copy.deepcopy(leaf)
                 cleaf.applyAssignment(assignment)
-                (tree, sub) = findTree(cleaf, library) # find a subtree library that match leaf(assignment) by a substitution
-                found = True
-                ctree = copy.deepcopy(tree) # get a copy of the subtree
-                ctree.applyAssignment(sub)
-                leaf.children.append(ctree)
+                (subtree, sub) = findTree(cleaf, library) # find a subtree library that match leaf(assignment) by a substitution
+                if subtree != None:
+                    found = True
+                    ctree = copy.deepcopy(subtree) # get a copy of the subtree
+                    ctree.applyAssignment(sub)
+                    leaf.children.append(ctree)
 
         if not found:
             break
@@ -36,7 +38,7 @@ def findTree(leaf, library):
         sub = leaf.match(tree)
         if sub != None:
             return (tree, sub)
-    return None
+    return (None, None)
 
 
 
@@ -52,11 +54,11 @@ def findAssignments(leaf, model):
                 if p.on:
                     v = getCAN(p.on, model)
                 else:
-                    v = copy.copy(model[1])
+                    v = [model[1][k] for k in model[1].keys()]
             elif p.type==data.CAN:
-                v = copy.copy(model[0])
+                v = [model[0][k] for k in model[0].keys()]
             else:
-                v = copy.copy(model[0]) + copy.copy(model[1])
+                v = [model[0][k] for k in model[0].keys()] + [model[1][k] for k in model[1].keys()]
             if p.diff:
                 v = removeDiff(v, p.diff)
             values.append(v)
@@ -65,7 +67,7 @@ def findAssignments(leaf, model):
     assignments = []
     a = [0 for v in values]
     while a:
-        assignment = (variables, [values[i][list(values[i].keys())[a[i]]] for i in range(len(values))])
+        assignment = (variables, [values[i][a[i]] for i in range(len(values))])
         assignments.append(assignment)
         a = getNextAssignment(a, values)
 

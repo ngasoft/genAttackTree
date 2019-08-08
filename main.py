@@ -1,6 +1,14 @@
 import parseTree
 import parseModel
 import genAT
+import xml.etree.ElementTree as ET
+
+
+def exportToXml(t):
+    root = ET.Element("sandtree")
+    root.append(t.toXml())
+    ET.ElementTree(root).write(open("output.xml", "wb"))
+
 
 XMLLibrary = ["Attack.xml", "Eavesdrop.xml", "EavesdropFrom.xml", "Compromise.xml", "CompromiseFromTo.xml", "CompromiseFromTo1.xml"]
 
@@ -17,4 +25,7 @@ Model = parseModel.parseModel("model.inp")
 
 t = genAT.genAT(Library, Model)
 
-print(t.toString())
+exportToXml(t)
+
+print("Export output")
+

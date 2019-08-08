@@ -1,4 +1,5 @@
 # data structure for tree node
+import xml.etree.ElementTree as ET
 
 
 ANY = -1
@@ -7,6 +8,15 @@ AND = 1
 SAND = 2
 CAN = 3
 ECU = 4
+
+def getXmlRefinement(n):
+    if n==OR:
+        return "disjunctive"
+    if n==AND:
+        return "conjunctive"
+    if n==SAND:
+        return "sequential"
+    return "UR"
 
 def rdata(n):
     if n==OR:
@@ -55,18 +65,32 @@ class TreeNode:
             return [self]
 
     def applyAssignment(self, assignment):
-        for i in len(self.params):
-            p = p[i]
+        for i in range(len(self.params)):
+            p = self.params[i]
             if isinstance(p, Variable):
-                for j in len(assignment):
+                for j in range(len(assignment[0])):
                     if assignment[0][j].name == p.name:
-                        p[i] = assignment[1][j]
+                        self.params[i] = assignment[1][j]
+            p = self.params[i]
+            if isinstance(p, Variable) and  isinstance(p.on, Variable):
+                for j in range(len(assignment[0])):
+                    if assignment[0][j].name == p.on.name:
+                        p.on = assignment[1][j]
+            if isinstance(p, Variable):
+                for k in range(len(p.diff)):
+                    d = p.diff[k]
+                    if isinstance(d, Variable):
+                        for j in range(len(assignment[0])):
+                            if assignment[0][j].name == d.name:
+                                p.diff[k] = assignment[1][j]
+        for c in self.children:
+            c.applyAssignment(assignment)
 
     def match(self, node):
         if node.name != self.name:
             return None
-        sub = [[],[]]
-        for i in len(self.params):
+        sub = ([],[])
+        for i in range(len(self.params)):
             if isinstance(node.params[i], Variable) and isinstance(self.params[i], GraphNode):
                 sub[0].append(node.params[i])
                 sub[1].append(self.params[i])
@@ -75,6 +99,15 @@ class TreeNode:
                     return None
         return sub
 
+    def toXml(self):
+        root = ET.Element("node")
+        root.set("refinement", getXmlRefinement(self.type))
+        label = ET.Element("label")
+        label.text = self.name + "(" + ",".join([p.name for p in self.params]) + ")"
+        root.append(label)
+        for c in self.children:
+            root.append(c.toXml())
+        return root
 
 
 class GraphNode:
