@@ -54,6 +54,28 @@ class TreeNode:
         else:
             return [self]
 
+    def applyAssignment(self, assignment):
+        for i in len(self.params):
+            p = p[i]
+            if isinstance(p, Variable):
+                for j in len(assignment):
+                    if assignment[0][j].name == p.name:
+                        p[i] = assignment[1][j]
+
+    def match(self, node):
+        if node.name != self.name:
+            return None
+        sub = [[],[]]
+        for i in len(self.params):
+            if isinstance(node.params[i], Variable) and isinstance(self.params[i], GraphNode):
+                sub[0].append(node.params[i])
+                sub[1].append(self.params[i])
+            elif isinstance(node.params[i], GraphNode) and isinstance(self.params[i], GraphNode):
+                if node.params[i].name != self.params[i].name:
+                    return None
+        return sub
+
+
 
 class GraphNode:
 
@@ -82,6 +104,7 @@ class Variable:
         self.name = ""
         self.type = ANY
         self.on = None
+        self.diff = []
 
     def toString(self):
         s = self.name
