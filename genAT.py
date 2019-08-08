@@ -5,7 +5,6 @@ import xml.etree.ElementTree as ET
 
 def genAT(library, model):
     tree = copy.deepcopy(library[0])
-    counter = 1
 
     while True:
 
@@ -17,12 +16,6 @@ def genAT(library, model):
         found = False
         for leaf in leaves:
             leaf.type = data.OR # turn leaf into an or node
-
-            if leaf.name == "CompromiseFromTo":
-                print("Break here " + str(counter))
-                counter += 1
-                if False and counter > 100:
-                    break
 
             assignments = findAssignments(leaf, model) # find all assigments for leaf
             if assignments == []:
