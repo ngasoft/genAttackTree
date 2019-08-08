@@ -70,7 +70,13 @@ def parseVar1(token):
     t = token.split(":")
     v.name = t[0]
     if len(t)>=2:
-        v.type = data.CAN if t[1]=="CAN" else data.ECU
+        if t[1]!="AP":
+            v.type = data.CAN if t[1]=="CAN" else data.ECU
+            if len(t)>=3 and t[2]=="AP":
+                v.isAP = True
+        else:
+            v.type = data.ECU
+            v.isAP = True
     return v
 
 # r = parseXmlTree("Attack.xml")

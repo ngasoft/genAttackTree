@@ -10,7 +10,7 @@ def exportToXml(t):
     ET.ElementTree(root).write(open("output.xml", "wb"))
 
 
-XMLLibrary = ["Attack.xml", "Eavesdrop.xml", "EavesdropFrom.xml", "Compromise.xml", "CompromiseFromTo.xml", "CompromiseFromTo1.xml"]
+XMLLibrary = ["Attack.xml", "Eavesdrop.xml", "EavesdropFrom.xml", "Compromise.xml", "CompromiseFromTo.xml"]
 
 Library = []
 

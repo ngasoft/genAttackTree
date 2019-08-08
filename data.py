@@ -83,6 +83,32 @@ class TreeNode:
                         for j in range(len(assignment[0])):
                             if assignment[0][j].name == d.name:
                                 p.diff[k] = assignment[1][j]
+            if isinstance(p, UnassignedList):
+                for i in range(len(assignment[0])):
+                    var = assignment[0][i]
+                    val = assignment[1][i]
+                    if isinstance(var, UnassignedList) and var.begin.name==p.begin.name and var.end.name==p.end.name:
+                        self.params[i] = val
+                if isinstance(p.begin, Variable):
+                    for j in range(len(assignment[0])):
+                        if isinstance(assignment[0][j],Variable) and assignment[0][j].name == p.begin.name:
+                            p.begin = assignment[1][j]
+                if isinstance(p.end, Variable):
+                    for j in range(len(assignment[0])):
+                        if isinstance(assignment[0][j],Variable) and assignment[0][j].name == p.end.name:
+                            p.end = assignment[1][j]
+            if isinstance(p, AssignedList):
+                if isinstance(p.head, Variable):
+                    for j in range(len(assignment[0])):
+                        if isinstance(assignment[0][j], Variable) and assignment[0][
+                            j].name == p.head.name:
+                            p.head = assignment[1][j]
+                if isinstance(p.tail, Variable):
+                    for j in range(len(assignment[0])):
+                        if isinstance(assignment[0][j], Variable) and assignment[0][
+                            j].name == p.tail.name:
+                            p.tail = assignment[1][j]
+
         for c in self.children:
             c.applyAssignment(assignment)
 
@@ -94,6 +120,13 @@ class TreeNode:
             if isinstance(node.params[i], Variable) and isinstance(self.params[i], GraphNode):
                 sub[0].append(node.params[i])
                 sub[1].append(self.params[i])
+            if isinstance(node.params[i], AssignedList) and len(self.params[i]) <= 0:
+                return None
+            if isinstance(node.params[i], AssignedList) and isinstance(self.params[i], list) and len(self.params[i])>0:
+                sub[0].append(node.params[i].head)
+                sub[1].append(self.params[i][0])
+                sub[0].append(node.params[i].tail)
+                sub[1].append(self.params[i][1:])
             elif isinstance(node.params[i], GraphNode) and isinstance(self.params[i], GraphNode):
                 if node.params[i].name != self.params[i].name:
                     return None
@@ -103,7 +136,7 @@ class TreeNode:
         root = ET.Element("node")
         root.set("refinement", getXmlRefinement(self.type))
         label = ET.Element("label")
-        label.text = self.name + "(" + ",".join([p.name for p in self.params]) + ")"
+        label.text = self.name + "(" + ",".join([listToString(p) if isinstance(p, list) else p.toString()  for p in self.params]) + ")"
         root.append(label)
         for c in self.children:
             root.append(c.toXml())
@@ -138,6 +171,7 @@ class Variable:
         self.type = ANY
         self.on = None
         self.diff = []
+        self.isAP = False
 
     def toString(self):
         s = self.name
@@ -163,17 +197,12 @@ class AssignedList:
         self.tail = None
 
     def toString(self):
-        s = "[" + self.head.toString() + "|" + self.tail.toString() + "]"
+        tailText = self.tail.toString() if isinstance(self.tail, Variable) else listToString(self.tail)
+        s = "[" + self.head.toString() + "|" + str(tailText) + "]"
         return s
 
-class SingletonList:
-
-    def __init__(self):
-        self.element = None
-
-    def toString(self):
-        s = "[" + self.element.toString() + "]"
-        return s
+def listToString(l):
+    return "["+ ",".join([i.toString() for i in l]) +"]"
 
 Library = None
 Tree = None

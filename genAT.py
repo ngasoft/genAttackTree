@@ -2,8 +2,10 @@ import copy
 import data
 import xml.etree.ElementTree as ET
 
+
 def genAT(library, model):
     tree = copy.deepcopy(library[0])
+    counter = 1
 
     while True:
 
@@ -15,9 +17,16 @@ def genAT(library, model):
         found = False
         for leaf in leaves:
             leaf.type = data.OR # turn leaf into an or node
+
+            if leaf.name == "CompromiseFromTo":
+                print("Break here " + str(counter))
+                counter += 1
+                if False and counter > 100:
+                    break
+
             assignments = findAssignments(leaf, model) # find all assigments for leaf
             if assignments == []:
-                assignments == [[]]
+                assignments = [[]]
             for assignment in assignments:
                 cleaf = copy.deepcopy(leaf)
                 cleaf.applyAssignment(assignment)
@@ -47,23 +56,16 @@ def findAssignments(leaf, model):
     variables = []
     values = []
     for p in leaf.params:
+        v = []
         if isinstance(p, data.Variable):
             variables.append(p)
-            v = []
-            if p.type==data.ECU:
-                if p.on:
-                    v = getCAN(p.on, model)
-                else:
-                    v = [model[1][k] for k in model[1].keys()]
-            elif p.type==data.CAN:
-                v = [model[0][k] for k in model[0].keys()]
-            else:
-                v = [model[0][k] for k in model[0].keys()] + [model[1][k] for k in model[1].keys()]
-            if p.diff:
-                v = removeDiff(v, p.diff)
-            values.append(v)
-            if not v:
-                return []
+            v = findValues(p, model)
+        if isinstance(p, data.UnassignedList):
+            variables.append(p)
+            v = findPaths(p.begin, p.end, model)
+        if not v:
+            return []
+        values.append(v)
     assignments = []
     a = [0 for v in values]
     while a:
@@ -72,6 +74,64 @@ def findAssignments(leaf, model):
         a = getNextAssignment(a, values)
 
     return assignments
+
+def findPaths(begin, end, model):
+    v0 = []
+    if isinstance(begin, data.Variable):
+        v0 = findValues(begin, model)
+    elif isinstance(begin, data.GraphNode):
+        v0 = [begin]
+    v1 = []
+    if isinstance(end, data.Variable):
+        v1 = findValues(end, model)
+    elif isinstance(end, data.GraphNode):
+        v1 = [end]
+
+    paths = []
+    for s in v0:
+        paths += dfs([s], v1, model) # depth first search
+
+    return paths
+
+def dfs(path, finals, model):
+    nexts = getNexts(path, model)
+    r = []
+    for n in nexts:
+        found = False
+        for m in finals:
+            if n.name == m.name:
+                found = True
+                path1 = path + [n]
+                r.append(path1)
+        if not found:
+            path1 = path + [n]
+            r += dfs(path1, finals, model)
+    return r
+
+def getNexts(path, model):
+    last = path[-1]
+    cans = [c for c in model[0].keys() if last in model[0][c].children]
+    nexts = []
+    for c in cans:
+        nexts += model[0][c].children
+    return [n for n in nexts if n not in path]
+
+def findValues(p, model):
+    if p.type == data.ECU:
+        if p.on:
+            v = getCAN(p.on, model)
+        else:
+            v = [model[1][k] for k in model[1].keys()]
+    elif p.type == data.CAN:
+        v = [model[0][k] for k in model[0].keys()]
+    else:
+        v = [model[0][k] for k in model[0].keys()] + [model[1][k] for k in model[1].keys()]
+    if p.diff:
+        v = removeDiff(v, p.diff)
+    if p.isAP:
+        v = [n for n in v if n.isAP]
+    return v
+
 
 def getNextAssignment(a, values):
     for i in range(len(a)):
