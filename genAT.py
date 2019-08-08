@@ -18,11 +18,12 @@ def genAT(library, model):
             if assignments == []:
                 assignments == [[]]
             for assignment in assignments:
-                aleaf = copy.deepcopy(leaf)
-                aleaf.applyAssignment(assignment)
-                (tree, sub) = findTree(leaf, library) # find a subtree library that match leaf(assignment) by a substitution
+                cleaf = copy.deepcopy(leaf)
+                cleaf.applyAssignment(assignment)
+                (tree, sub) = findTree(cleaf, library) # find a subtree library that match leaf(assignment) by a substitution
                 found = True
                 ctree = copy.deepcopy(tree) # get a copy of the subtree
+                ctree.applyAssignment(sub)
                 leaf.children.append(ctree)
 
         if not found:
@@ -51,11 +52,11 @@ def findAssignments(leaf, model):
                 if p.on:
                     v = getCAN(p.on, model)
                 else:
-                    v = model[1]
+                    v = copy.copy(model[1])
             elif p.type==data.CAN:
-                v = model[0]
+                v = copy.copy(model[0])
             else:
-                v = model[0] + model[1]
+                v = copy.copy(model[0]) + copy.copy(model[1])
             if p.diff:
                 v = removeDiff(v, p.diff)
             values.append(v)
@@ -64,7 +65,7 @@ def findAssignments(leaf, model):
     assignments = []
     a = [0 for v in values]
     while a:
-        assignment = (variables, [values[i][a[i]] for i in range(len(values))])
+        assignment = (variables, [values[i][list(values[i].keys())[a[i]]] for i in range(len(values))])
         assignments.append(assignment)
         a = getNextAssignment(a, values)
 
@@ -81,11 +82,11 @@ def getNextAssignment(a, values):
 
 def getCAN(node, model):
     if node.type == data.CAN:
-        return model[0][node.name].children
+        return copy.copy(model[0][node.name].children)
     else:
         for c in model[0]:
             if node in model[0][c].children:
-                return model[0][c].children
+                return copy.copy(model[0][c].children)
 
 def removeDiff(v, diff):
     for d in diff:
