@@ -41,6 +41,14 @@ class TreeNode:
         self.params = []
         self.children = []
 
+    def copy(self):
+        c = TreeNode()
+        c.type = self.type
+        c.name = self.name
+        c.params = [p.copy() for p in self.params]
+        c.children = [ch.copy() for ch in self.children]
+        return c
+
     def toString(self):
         s = self.name + "#"
         for p in self.params:
@@ -165,6 +173,9 @@ class GraphNode:
         s += ")"
         return s
 
+    def copy(self):
+        return self
+
 class Variable:
     def __init__(self):
         self.name = ""
@@ -172,6 +183,16 @@ class Variable:
         self.on = None
         self.diff = []
         self.isAP = False
+
+    def copy(self):
+        v = Variable()
+        v.name = self.name
+        v.type = self.type
+        v.on = self.on.copy() if self.on else None
+        v.diff = [d.copy() for d in self.diff]
+        v.isAP = self.isAP
+        return v
+
 
     def toString(self):
         s = self.name
@@ -185,21 +206,38 @@ class UnassignedList:
     def __init__(self):
         self.begin = None
         self.end   = None
+        self.name  = "UnassignedList_ShouldNotMatchWithVariableName"
 
     def toString(self):
         s = "[" + self.begin.toString() + ".." + self.end.toString() + "]"
         return s
+
+    def copy(self):
+        l = UnassignedList()
+        l.begin = self.begin.copy() if self.begin else None
+        l.end = self.end.copy() if self.end else None
+        return l
 
 class AssignedList:
 
     def __init__(self):
         self.head = None
         self.tail = None
+        self.name = "AssignedList_ShouldNotMatchWithVariableName"
 
     def toString(self):
         tailText = self.tail.toString() if isinstance(self.tail, Variable) else listToString(self.tail)
         s = "[" + self.head.toString() + "|" + str(tailText) + "]"
         return s
+
+
+    def copy(self):
+        l = AssignedList()
+        l.head = self.head.copy() if self.head else None
+        l.tail = self.tail.copy() if self.tail else None
+        return l
+
+
 
 def listToString(l):
     return "["+ ",".join([i.toString() for i in l]) +"]"

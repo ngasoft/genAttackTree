@@ -3,8 +3,8 @@ import data
 import xml.etree.ElementTree as ET
 
 
-def genAT(library, model):
-    tree = copy.deepcopy(library[0])
+def genAT(library, root, model):
+    tree = root.copy()
 
     while True:
 
@@ -16,17 +16,16 @@ def genAT(library, model):
         found = False
         for leaf in leaves:
             leaf.type = data.OR # turn leaf into an or node
-
             assignments = findAssignments(leaf, model) # find all assigments for leaf
             if assignments == []:
                 assignments = [[]]
             for assignment in assignments:
-                cleaf = copy.deepcopy(leaf)
+                cleaf = leaf.copy()
                 cleaf.applyAssignment(assignment)
                 (subtree, sub) = findTree(cleaf, library) # find a subtree library that match leaf(assignment) by a substitution
                 if subtree != None:
                     found = True
-                    ctree = copy.deepcopy(subtree) # get a copy of the subtree
+                    ctree = subtree.copy() # get a copy of the subtree
                     ctree.applyAssignment(sub)
                     leaf.children.append(ctree)
 
@@ -59,6 +58,12 @@ def findAssignments(leaf, model):
         if not v:
             return []
         values.append(v)
+        if isinstance(p, data.UnassignedList) and isinstance(p.begin, data.Variable):
+            variables.append(p.begin)
+            values.append([v1[0] for v1 in v])
+        if isinstance(p, data.UnassignedList) and isinstance(p.end, data.Variable):
+            variables.append(p.end)
+            values.append([v1[-1] for v1 in v])
     assignments = []
     a = [0 for v in values]
     while a:

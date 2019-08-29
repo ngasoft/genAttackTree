@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<sandtree>
+	<node refinement="sequential">
+		<label>RemoteAnalysis
+[ X | L ]</label>
+		<node refinement="conjunctive">
+			<label>DirectDataFromTo
+X L</label>
+		</node>
+		<node refinement="conjunctive">
+			<label>LocalAnalysisLastNode</label>
+		</node>
+	</node>
+</sandtree>

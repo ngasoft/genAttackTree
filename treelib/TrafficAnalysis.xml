@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<sandtree>
+	<node refinement="conjunctive">
+		<label>TrafficAnalysis
+X:CAN</label>
+		<node refinement="conjunctive">
+			<label>TrafficAnalysisFrom
+Y:ECU/X:CAN</label>
+		</node>
+	</node>
+</sandtree>

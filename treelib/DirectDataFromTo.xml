@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<sandtree>
+	<node refinement="sequential">
+		<label>DirectDataFromTo
+X [ Y | L ]</label>
+		<node refinement="disjunctive">
+			<label>TakeControl
+Y</label>
+			<node refinement="conjunctive">
+				<label>Reflash
+Y</label>
+			</node>
+			<node refinement="conjunctive">
+				<label>GainRoot
+Y</label>
+			</node>
+		</node>
+		<node refinement="conjunctive">
+			<label>SendDataFromTo
+X Y</label>
+		</node>
+		<node refinement="conjunctive">
+			<label>DirectDataFromTo
+Y L</label>
+		</node>
+	</node>
+</sandtree>

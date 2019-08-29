@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<sandtree>
+	<node refinement="sequential">
+		<label>TrafficAnalysisFrom
+Y:ECU</label>
+		<node refinement="conjunctive">
+			<label>Compromise
+Y</label>
+		</node>
+		<node refinement="conjunctive">
+			<label>CollectTrafficDataFrom
+Y</label>
+		</node>
+		<node refinement="conjunctive">
+			<label>AnalyseTrafficDataFrom
+Y</label>
+		</node>
+	</node>
+</sandtree>

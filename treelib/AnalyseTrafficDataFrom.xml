@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<sandtree>
+	<node refinement="disjunctive">
+		<label>AnalyseTrafficDataFrom
+Y:ECU</label>
+		<node refinement="disjunctive">
+			<label>LocalAnalysisAt
+Y</label>
+		</node>
+		<node refinement="conjunctive">
+			<label>RemoteAnalysis
+[ Y:ECU .. Z:AP ]</label>
+		</node>
+	</node>
+</sandtree>
