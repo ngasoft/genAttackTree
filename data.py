@@ -161,16 +161,16 @@ class GraphNode:
 
     def toString(self):
         s = self.name
-        if self.isAP:
-            s += (":AP")
-        s += ":" + rdata(self.type)
-        s += "("
-        for c in self.children:
-            s += c.toString()
-            s += ", "
-        if s[-2:] == ", ":
-            s = s[:-2]
-        s += ")"
+        # if self.isAP:
+        #     s += (":AP")
+        # s += ":" + rdata(self.type)
+        # s += "("
+        # for c in self.children:
+        #     s += c.toString()
+        #     s += ", "
+        # if s[-2:] == ", ":
+        #     s = s[:-2]
+        # s += ")"
         return s
 
     def copy(self):

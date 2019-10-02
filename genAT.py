@@ -58,16 +58,17 @@ def findAssignments(leaf, model):
         if not v:
             return []
         values.append(v)
-        if isinstance(p, data.UnassignedList) and isinstance(p.begin, data.Variable):
-            variables.append(p.begin)
-            values.append([v1[0] for v1 in v])
-        if isinstance(p, data.UnassignedList) and isinstance(p.end, data.Variable):
-            variables.append(p.end)
-            values.append([v1[-1] for v1 in v])
     assignments = []
     a = [0 for v in values]
     while a:
-        assignment = (variables, [values[i][a[i]] for i in range(len(values))])
+        assignment = [list(variables), [values[i][a[i]] for i in range(len(values))]]
+        for i, var in enumerate(variables):
+            if isinstance(var, data.UnassignedList) and isinstance(var.begin, data.Variable):
+                assignment[0].append(var.begin)
+                assignment[1].append(assignment[1][i][0])
+            if isinstance(var, data.UnassignedList) and isinstance(var.end, data.Variable):
+                assignment[0].append(var.end)
+                assignment[1].append(assignment[1][i][-1])
         assignments.append(assignment)
         a = getNextAssignment(a, values)
 
