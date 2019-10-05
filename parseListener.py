@@ -36,7 +36,7 @@ class NodeListener(NodeTemplateListener):
 
     def exitNetVariable(self, ctx:NodeTemplateParser.NetVariableContext):
         self.variable.on = data.Variable()
-        self.variable.on.name = ctx.NAME()
+        self.variable.on.name = ctx.NAME().getText()
         self.variable.on.type = data.CAN
 
     def exitNetConstant(self, ctx:NodeTemplateParser.NetConstantContext):

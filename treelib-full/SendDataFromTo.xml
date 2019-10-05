@@ -1,15 +1,15 @@
 <?xml version='1.0'?>
 <sandtree>
-	<node refinement="conjunctive">
-		<label>DirectDataFromTo
+	<node refinement="sequential">
+		<label>SendDataFromTo
 [X|L]</label>
 		<node refinement="conjunctive">
-			<label>CompromiseFromTo
-[X|L]</label>
+			<label>SendDataFrom
+X</label>
 		</node>
 		<node refinement="conjunctive">
 			<label>SendDataFromTo
-[X|L]</label>
+L</label>
 		</node>
 	</node>
 </sandtree>

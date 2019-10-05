@@ -1,11 +1,11 @@
 <?xml version='1.0'?>
 <sandtree>
 	<node refinement="conjunctive">
-		<label>TrafficAnalysis
-X:NET</label>
+		<label>Compromise
+@ECM</label>
 		<node refinement="conjunctive">
-			<label>TrafficAnalysisFrom
-Y:ECU/X</label>
+			<label>CompromiseFromTo
+[ Z:AP .. @ECM ]</label>
 		</node>
 	</node>
 </sandtree>

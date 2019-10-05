@@ -22,6 +22,7 @@ def parseXmlTree(xmlFile, model):
 
 def parseXmlNode(n, model):
     children = list(n)
+    # print("Parsing text : " + children[0].text)
     t = parseNode(children[0].text, model)
     if n.get("refinement")==ORNODE:
         t.type = data.OR

@@ -6,17 +6,17 @@
 			<label>Passive</label>
 			<node refinement="conjunctive">
 				<label>Eavesdrop
-X:CAN</label>
+X:NET</label>
 			</node>
 			<node refinement="conjunctive">
 				<label>TrafficAnalysis
-X:CAN</label>
+X:NET</label>
 			</node>
 		</node>
 		<node refinement="disjunctive">
 			<label>Active</label>
 			<node refinement="conjunctive">
-				<label>Masquerade
+				<label>Spoof
 X:ECU
 Y:ECU</label>
 			</node>
@@ -31,7 +31,7 @@ Y:ECU</label>
 			</node>
 			<node refinement="conjunctive">
 				<label>DoS
-X:CAN</label>
+X:NET</label>
 			</node>
 		</node>
 	</node>

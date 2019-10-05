@@ -80,7 +80,7 @@ class TreeNode:
                     if assignment[0][j].name == p.name:
                         self.params[i] = assignment[1][j]
             p = self.params[i]
-            if isinstance(p, Variable) and  isinstance(p.on, Variable):
+            if isinstance(p, Variable) and isinstance(p.on, Variable):
                 for j in range(len(assignment[0])):
                     if assignment[0][j].name == p.on.name:
                         p.on = assignment[1][j]
@@ -108,14 +108,13 @@ class TreeNode:
             if isinstance(p, AssignedList):
                 if isinstance(p.head, Variable):
                     for j in range(len(assignment[0])):
-                        if isinstance(assignment[0][j], Variable) and assignment[0][
-                            j].name == p.head.name:
+                        if isinstance(assignment[0][j], Variable) and assignment[0][j].name == p.head.name:
                             p.head = assignment[1][j]
                 if isinstance(p.tail, Variable):
                     for j in range(len(assignment[0])):
-                        if isinstance(assignment[0][j], Variable) and assignment[0][
-                            j].name == p.tail.name:
+                        if isinstance(assignment[0][j], Variable) and assignment[0][j].name == p.tail.name:
                             p.tail = assignment[1][j]
+                            self.params[i] = [p.head] + p.tail
 
         for c in self.children:
             c.applyAssignment(assignment)
@@ -128,9 +127,11 @@ class TreeNode:
             if isinstance(node.params[i], Variable) and isinstance(self.params[i], GraphNode):
                 sub[0].append(node.params[i])
                 sub[1].append(self.params[i])
-            if isinstance(node.params[i], AssignedList) and len(self.params[i]) <= 0:
+            if isinstance(node.params[i], AssignedList) and isinstance(self.params[i], list) and len(self.params[i]) <= 0:
                 return None
             if isinstance(node.params[i], AssignedList) and isinstance(self.params[i], list) and len(self.params[i])>0:
+                sub[0].append(node.params[i])
+                sub[1].append(self.params[i])
                 sub[0].append(node.params[i].head)
                 sub[1].append(self.params[i][0])
                 sub[0].append(node.params[i].tail)

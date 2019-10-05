@@ -19,7 +19,7 @@ def genAT(library, root, model):
             assignments = findAssignments(leaf, model) # find all assigments for leaf
             if assignments == []:
                 assignments = [[]]
-            for assignment in assignments:
+            for (i,assignment) in enumerate(assignments):
                 cleaf = leaf.copy()
                 cleaf.applyAssignment(assignment)
                 (subtree, sub) = findTree(cleaf, library) # find a subtree library that match leaf(assignment) by a substitution
@@ -88,23 +88,28 @@ def findPaths(begin, end, model):
 
     paths = []
     for s in v0:
+        if s in v1:
+            paths += [[s]]
         paths += dfs([s], v1, model) # depth first search
 
     return paths
 
 def dfs(path, finals, model):
-    nexts = getNexts(path, model)
     r = []
+    nexts = getNexts(path, model)
+    found = False
     for n in nexts:
-        found = False
         for m in finals:
             if n.name == m.name:
                 found = True
                 path1 = path + [n]
                 r.append(path1)
-        if not found:
-            path1 = path + [n]
-            r += dfs(path1, finals, model)
+    if not found:
+        for n in nexts:
+            cans = [c for c in model[0].keys() if n in model[0][c].children]
+            if len(cans)>1:
+                path1 = path + [n]
+                r += dfs(path1, finals, model)
     return r
 
 def getNexts(path, model):

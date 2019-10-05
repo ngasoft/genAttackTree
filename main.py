@@ -5,36 +5,43 @@ import xml.etree.ElementTree as ET
 import os
 
 
-def exportToXml(t):
+def exportToXml(t, example):
     root = ET.Element("sandtree")
     root.append(t.toXml())
-    ET.ElementTree(root).write(open("output-mini.xml", "wb"))
+    ET.ElementTree(root).write(open("output-" + example + ".xml", "wb"))
 
-def main():
-    Model = parseModel.parseModel("model-mini.inp")
+def main(example):
+    print("Loading input model ...")
+    Model = parseModel.parseModel("model-" + example + ".inp")
 
-    LibraryFolder = "treelib-mini"
+    LibraryFolder = "treelib-" + example
     # XMLLibrary = ["Attack.xml", "Eavesdrop.xml", "EavesdropFrom.xml", "Compromise.xml", "CompromiseFromTo.xml"]
     XMLLibrary = [os.path.join(LibraryFolder, f) for f in os.listdir(LibraryFolder) if f.endswith(".xml") and os.path.isfile(os.path.join(LibraryFolder, f))]
-    XMLRoot = os.path.join(LibraryFolder, "Compromise.xml") # for the mini library # attack.xml is for the full one
+    if example=="mini":
+        XMLRoot = os.path.join(LibraryFolder, "Compromise.xml")
+    elif example=="full":
+        XMLRoot = os.path.join(LibraryFolder, "Attack.xml")
     RootTree = 0
     Library = []
 
     print("Loading template library ...")
 
     for xml in XMLLibrary:
+        print("Parsing file : " + xml + " ... ")
         r = parseTree.parseXmlTree(xml, Model)
         if xml == XMLRoot:
             RootTree = r
         Library.append(r)
 
-    print("Loading input model ...")
 
+    print("Generating attack tree ...")
     t = genAT.genAT(Library, RootTree, Model)
 
-    exportToXml(t)
+    exportToXml(t, example)
 
     print("Export output")
 
-import cProfile
-cProfile.run('main()' )
+main("full")
+#import cProfile
+#cProfile.run('main()' )
+

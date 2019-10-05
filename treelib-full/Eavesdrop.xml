@@ -2,10 +2,10 @@
 <sandtree>
 	<node refinement="conjunctive">
 		<label>Eavesdrop
-X:CAN</label>
+X:NET</label>
 		<node refinement="conjunctive">
 			<label>EavesdropFrom
-Y:ECU/X:CAN</label>
+Y:ECU/X</label>
 		</node>
 	</node>
 </sandtree>
