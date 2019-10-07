@@ -49,6 +49,12 @@ class TreeNode:
         c.children = [ch.copy() for ch in self.children]
         return c
 
+    def size(self):
+        return 1 + sum([c.size() for c in self.children])
+
+    def height(self):
+        return 1 + (max([c.height() for c in self.children]) if self.children else 0)
+
     def toString(self):
         s = self.name + "#"
         for p in self.params:

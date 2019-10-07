@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<sandtree>
+	<node refinement="sequential">
+		<label>ReplayFrom
+X Y</label>
+		<node refinement="conjunctive">
+			<label>DirectDataFromTo
+[X .. Y]</label>
+		</node>
+		<node refinement="sequential">
+			<label>RecordDataAt
+Y</label>
+		</node>
+		<node refinement="sequential">
+			<label>DirectDataFromTo
+[Y .. X]</label>
+		</node>
+	</node>
+</sandtree>

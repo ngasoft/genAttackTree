@@ -17,17 +17,11 @@ X:NET</label>
 			<label>Active</label>
 			<node refinement="conjunctive">
 				<label>Spoof
-X:ECU
-Y:ECU</label>
+X:ECU</label>
 			</node>
 			<node refinement="conjunctive">
 				<label>Replay
 X:ECU</label>
-			</node>
-			<node refinement="conjunctive">
-				<label>Modification
-X:ECU
-Y:ECU</label>
 			</node>
 			<node refinement="conjunctive">
 				<label>DoS

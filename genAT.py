@@ -52,12 +52,12 @@ def findAssignments(leaf, model):
         if isinstance(p, data.Variable):
             variables.append(p)
             v = findValues(p, model)
+            values.append(v)
         if isinstance(p, data.UnassignedList):
             variables.append(p)
             v = findPaths(p.begin, p.end, model)
-        if not v:
-            return []
-        values.append(v)
+            values.append(v)
+
     assignments = []
     a = [0 for v in values]
     while a:
@@ -94,6 +94,7 @@ def findPaths(begin, end, model):
 
     return paths
 
+
 def dfs(path, finals, model):
     r = []
     nexts = getNexts(path, model)
@@ -112,6 +113,7 @@ def dfs(path, finals, model):
                 r += dfs(path1, finals, model)
     return r
 
+
 def getNexts(path, model):
     last = path[-1]
     cans = [c for c in model[0].keys() if last in model[0][c].children]
@@ -126,6 +128,7 @@ def findValues(p, model):
             v = getCAN(p.on, model)
         else:
             v = [model[1][k] for k in model[1].keys()]
+
     elif p.type == data.CAN:
         v = [model[0][k] for k in model[0].keys()]
     else:

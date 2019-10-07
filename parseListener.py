@@ -34,6 +34,17 @@ class NodeListener(NodeTemplateListener):
             self.variable.type = data.ECU
             self.variable.isAP = True
 
+    def exitDiffVar(self, ctx:NodeTemplateParser.DiffVarContext):
+        var = data.Variable()
+        var.name = ctx.NAME().getText();
+        self.variable.diff.append(var)
+
+    def exitDiffConstant(self, ctx:NodeTemplateParser.DiffConstantContext):
+        n = ctx.NAME().getText()
+        if n in self.model[1]:
+            self.variable.diff.append(self.model[1][n])
+
+
     def exitNetVariable(self, ctx:NodeTemplateParser.NetVariableContext):
         self.variable.on = data.Variable()
         self.variable.on.name = ctx.NAME().getText()

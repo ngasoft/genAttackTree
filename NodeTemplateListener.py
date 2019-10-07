@@ -1,4 +1,4 @@
-# Generated from C:/Users/Hoang Nga Nguyen/OneDrive - Coventry University/GitHub/genAT\NodeTemplate.g4 by ANTLR 4.7.2
+# Generated from C:/Users/ac1222/OneDrive - Coventry University/GitHub/genAT\NodeTemplate.g4 by ANTLR 4.7.2
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .NodeTemplateParser import NodeTemplateParser
@@ -41,6 +41,24 @@ class NodeTemplateListener(ParseTreeListener):
 
     # Exit a parse tree produced by NodeTemplateParser#vartype.
     def exitVartype(self, ctx:NodeTemplateParser.VartypeContext):
+        pass
+
+
+    # Enter a parse tree produced by NodeTemplateParser#diffVar.
+    def enterDiffVar(self, ctx:NodeTemplateParser.DiffVarContext):
+        pass
+
+    # Exit a parse tree produced by NodeTemplateParser#diffVar.
+    def exitDiffVar(self, ctx:NodeTemplateParser.DiffVarContext):
+        pass
+
+
+    # Enter a parse tree produced by NodeTemplateParser#diffConstant.
+    def enterDiffConstant(self, ctx:NodeTemplateParser.DiffConstantContext):
+        pass
+
+    # Exit a parse tree produced by NodeTemplateParser#diffConstant.
+    def exitDiffConstant(self, ctx:NodeTemplateParser.DiffConstantContext):
         pass
 
 

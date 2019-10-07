@@ -1,11 +1,14 @@
 grammar NodeTemplate;
 
-tree_node : NAME ( param (',' param )* )?;
+tree_node : NAME param*;
 
 param : variable | glist | constant; // list is a keyword in python hence use glist here to avoid conflict
 
-variable : NAME (':' vartype)? ('/' net)? ;
+variable : NAME (':' vartype)? ('#' (diffVar|diffConstant))* ('/' net)? ;
 vartype  : NET | ECU | AP ;
+
+diffVar : NAME ;
+diffConstant : '@' NAME ;
 
 net : netConstant | netVariable ;
 

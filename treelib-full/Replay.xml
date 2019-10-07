@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<sandtree>
+	<node refinement="sequential">
+		<label>Replay
+X</label>
+		<node refinement="conjunctive">
+			<label>ReplayFrom
+X Y:AP</label>
+		</node>
+	</node>
+</sandtree>

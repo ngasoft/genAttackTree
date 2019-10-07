@@ -4,6 +4,9 @@ import genAT
 import xml.etree.ElementTree as ET
 import os
 
+# two default examples
+MINI = "mini"
+FULL = "full"
 
 def exportToXml(t, example):
     root = ET.Element("sandtree")
@@ -18,7 +21,7 @@ def main(example):
     # XMLLibrary = ["Attack.xml", "Eavesdrop.xml", "EavesdropFrom.xml", "Compromise.xml", "CompromiseFromTo.xml"]
     XMLLibrary = [os.path.join(LibraryFolder, f) for f in os.listdir(LibraryFolder) if f.endswith(".xml") and os.path.isfile(os.path.join(LibraryFolder, f))]
     if example=="mini":
-        XMLRoot = os.path.join(LibraryFolder, "Compromise.xml")
+        XMLRoot = os.path.join(LibraryFolder, "CompromiseECM.xml")
     elif example=="full":
         XMLRoot = os.path.join(LibraryFolder, "Attack.xml")
     RootTree = 0
@@ -37,11 +40,16 @@ def main(example):
     print("Generating attack tree ...")
     t = genAT.genAT(Library, RootTree, Model)
 
+    print("Tree size: " + str(t.size()))
+    print("Tree height: " + str(t.height()))
+
     exportToXml(t, example)
 
-    print("Export output")
+    print("Output exported")
 
-main("full")
-#import cProfile
-#cProfile.run('main()' )
+#main(MINI)
+#main(FULL)
+import cProfile
+cProfile.run('main(MINI)' )
+#cProfile.run('main(FULL)' )
 

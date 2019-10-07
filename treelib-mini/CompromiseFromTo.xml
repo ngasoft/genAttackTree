@@ -3,7 +3,7 @@
 	<node refinement="sequential">
 		<label>CompromiseFromTo
 [ Z | L ]</label>
-		<node refinement="sequential">
+		<node refinement="disjunctive">
 			<label>TakeControl
 Z</label>
 			<node refinement="conjunctive">

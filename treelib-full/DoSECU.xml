@@ -1,11 +1,11 @@
 <?xml version='1.0'?>
 <sandtree>
 	<node refinement="conjunctive">
-		<label>Compromise
-@ECM</label>
+		<label>DoSECU
+X</label>
 		<node refinement="conjunctive">
-			<label>CompromiseFromTo
-[ Z:AP .. @ECM ]</label>
+			<label>DoSECUFrom
+X Y:AP</label>
 		</node>
 	</node>
 </sandtree>

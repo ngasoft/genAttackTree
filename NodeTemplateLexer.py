@@ -1,4 +1,4 @@
-# Generated from C:/Users/Hoang Nga Nguyen/OneDrive - Coventry University/GitHub/genAT\NodeTemplate.g4 by ANTLR 4.7.2
+# Generated from C:/Users/ac1222/OneDrive - Coventry University/GitHub/genAT\NodeTemplate.g4 by ANTLR 4.7.2
 from antlr4 import *
 from io import StringIO
 from typing import TextIO
@@ -26,9 +26,9 @@ def serializedATN():
         buf.write("\3\2\2\2\t)\3\2\2\2\13+\3\2\2\2\r-\3\2\2\2\17/\3\2\2\2")
         buf.write("\21\61\3\2\2\2\23\65\3\2\2\2\258\3\2\2\2\27=\3\2\2\2\31")
         buf.write("A\3\2\2\2\33E\3\2\2\2\35H\3\2\2\2\37O\3\2\2\2!S\3\2\2")
-        buf.write("\2#$\7.\2\2$\4\3\2\2\2%&\7<\2\2&\6\3\2\2\2\'(\7\61\2\2")
-        buf.write("(\b\3\2\2\2)*\7]\2\2*\n\3\2\2\2+,\7_\2\2,\f\3\2\2\2-.")
-        buf.write("\7~\2\2.\16\3\2\2\2/\60\7B\2\2\60\20\3\2\2\2\61\62\7C")
+        buf.write("\2#$\7<\2\2$\4\3\2\2\2%&\7%\2\2&\6\3\2\2\2\'(\7\61\2\2")
+        buf.write("(\b\3\2\2\2)*\7B\2\2*\n\3\2\2\2+,\7]\2\2,\f\3\2\2\2-.")
+        buf.write("\7_\2\2.\16\3\2\2\2/\60\7~\2\2\60\20\3\2\2\2\61\62\7C")
         buf.write("\2\2\62\63\7P\2\2\63\64\7F\2\2\64\22\3\2\2\2\65\66\7Q")
         buf.write("\2\2\66\67\7T\2\2\67\24\3\2\2\289\7U\2\29:\7C\2\2:;\7")
         buf.write("P\2\2;<\7F\2\2<\26\3\2\2\2=>\7P\2\2>?\7G\2\2?@\7V\2\2")
@@ -69,7 +69,7 @@ class NodeTemplateLexer(Lexer):
     modeNames = [ "DEFAULT_MODE" ]
 
     literalNames = [ "<INVALID>",
-            "','", "':'", "'/'", "'['", "']'", "'|'", "'@'", "'AND'", "'OR'", 
+            "':'", "'#'", "'/'", "'@'", "'['", "']'", "'|'", "'AND'", "'OR'", 
             "'SAND'", "'NET'", "'ECU'", "'AP'", "'..'" ]
 
     symbolicNames = [ "<INVALID>",

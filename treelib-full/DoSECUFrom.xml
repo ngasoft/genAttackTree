@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<sandtree>
+	<node refinement="conjunctive">
+		<label>DoSECUFrom
+X Y</label>
+		<node refinement="conjunctive">
+			<label>DirectDataFromTo
+[Y .. X]</label>
+		</node>
+	</node>
+</sandtree>
