@@ -50,6 +50,6 @@ def main(example):
 #main(MINI)
 #main(FULL)
 import cProfile
-cProfile.run('main(MINI)' )
-#cProfile.run('main(FULL)' )
+#cProfile.run('main(MINI)' )
+cProfile.run('main(FULL)' )
 
