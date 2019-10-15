@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<sandtree>
+	<node refinement="sequential">
+		<label>CompromiseBackwardFromTo
+[ Z | L ]</label>
+		<node refinement="disjunctive">
+			<label>CompromiseBackwardFromTo
+L</label>
+		</node>
+		<node refinement="disjunctive">
+			<label>TakeControl
+Z</label>
+			<node refinement="conjunctive">
+				<label>Reflash
+Z</label>
+			</node>
+			<node refinement="conjunctive">
+				<label>GainRoot
+Z</label>
+			</node>
+		</node>
+	</node>
+</sandtree>

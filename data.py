@@ -98,9 +98,9 @@ class TreeNode:
                             if assignment[0][j].name == d.name:
                                 p.diff[k] = assignment[1][j]
             if isinstance(p, UnassignedList):
-                for i in range(len(assignment[0])):
-                    var = assignment[0][i]
-                    val = assignment[1][i]
+                for j in range(len(assignment[0])):
+                    var = assignment[0][j]
+                    val = assignment[1][j]
                     if isinstance(var, UnassignedList) and var.begin.name==p.begin.name and var.end.name==p.end.name:
                         self.params[i] = val
                 if isinstance(p.begin, Variable):

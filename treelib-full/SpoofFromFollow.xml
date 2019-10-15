@@ -1,15 +1,19 @@
 <?xml version='1.0'?>
 <sandtree>
 	<node refinement="sequential">
-		<label>DoSECU
-X</label>
+		<label>SpoofFromFollow
+Y [X|L]</label>
 		<node refinement="conjunctive">
 			<label>Compromise
-X</label>
+Y</label>
 		</node>
 		<node refinement="conjunctive">
-			<label>FloodNetworkFrom
-X</label>
+			<label>MimicDataFrom
+X Y</label>
+		</node>
+		<node refinement="sequential">
+			<label>DirectDataBackwardFromTo
+L</label>
 		</node>
 	</node>
 </sandtree>

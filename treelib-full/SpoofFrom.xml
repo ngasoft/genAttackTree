@@ -4,12 +4,8 @@
 		<label>SpoofFrom
 X Y</label>
 		<node refinement="conjunctive">
-			<label>MimicDataFrom
-X Y</label>
-		</node>
-		<node refinement="sequential">
-			<label>DirectDataFromTo
-[Y .. X]</label>
+			<label>SpoofFromFollow
+Y [X .. Y]</label>
 		</node>
 	</node>
 </sandtree>

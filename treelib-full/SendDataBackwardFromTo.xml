@@ -1,14 +1,14 @@
 <?xml version='1.0'?>
 <sandtree>
 	<node refinement="sequential">
-		<label>DoSECU
-X</label>
+		<label>SendDataBackwardFromTo
+[X|L]</label>
 		<node refinement="conjunctive">
-			<label>Compromise
-X</label>
+			<label>SendDataBackwardFromTo
+L</label>
 		</node>
 		<node refinement="conjunctive">
-			<label>FloodNetworkFrom
+			<label>SendDataFrom
 X</label>
 		</node>
 	</node>
