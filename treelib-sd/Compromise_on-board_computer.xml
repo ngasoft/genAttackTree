@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<adtree>
+	<node refinement="disjunctive">
+		<label>CompromiseOnboardComputer</label>
+		<node refinement="conjunctive">
+			<label>CompromiseUSB</label>
+		</node>
+		<node refinement="conjunctive">
+			<label>CompromiseBluetooth</label>
+		</node>
+		<node refinement="conjunctive">
+			<label>CompromiseSignalsOnEthernet</label>
+		</node>
+		<node refinement="conjunctive">
+			<label>CompromiseSignalsOnCANbus</label>
+		</node>
+		<node refinement="disjunctive" switchRole="yes">
+			<label>OnboardComputerIntrusionDetection</label>
+		</node>
+	</node>
+</adtree>

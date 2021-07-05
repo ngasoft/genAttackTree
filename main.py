@@ -7,9 +7,16 @@ import os
 # two default examples
 MINI = "mini"
 FULL = "full"
+SD   = "sd"
+
+lib_root = {
+    MINI : "CompromiseECM.xml",
+    FULL : "Attack.xml",
+    SD   : "Compromise_on-board_computer.xml"
+}
 
 def exportToXml(t, example):
-    root = ET.Element("sandtree")
+    root = ET.Element("adtree")
     root.append(t.toXml())
     ET.ElementTree(root).write(open("output-" + example + ".xml", "wb"))
 
@@ -20,10 +27,7 @@ def main(example):
     LibraryFolder = "treelib-" + example
     # XMLLibrary = ["Attack.xml", "Eavesdrop.xml", "EavesdropFrom.xml", "Compromise.xml", "CompromiseFromTo.xml"]
     XMLLibrary = [os.path.join(LibraryFolder, f) for f in os.listdir(LibraryFolder) if f.endswith(".xml") and os.path.isfile(os.path.join(LibraryFolder, f))]
-    if example=="mini":
-        XMLRoot = os.path.join(LibraryFolder, "CompromiseECM.xml")
-    elif example=="full":
-        XMLRoot = os.path.join(LibraryFolder, "Attack.xml")
+    XMLRoot = os.path.join(LibraryFolder, lib_root[example])
     RootTree = 0
     Library = []
 
@@ -49,7 +53,8 @@ def main(example):
 
 #main(MINI)
 #main(FULL)
+main(SD)
 import cProfile
 #cProfile.run('main(MINI)' )
-cProfile.run('main(FULL)' )
+#cProfile.run('main(FULL)' )
 

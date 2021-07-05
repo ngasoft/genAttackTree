@@ -31,6 +31,11 @@ def parseXmlNode(n, model):
     if n.get("refinement")==SANDNODE:
         t.type = data.SAND
 
+    if n.get("switchRole")=="yes":
+        t.po_type = data.OPP
+    else:
+        t.po_type = data.PRO
+
     for c in children[1:]:
         t.children.append(parseXmlNode(c, model))
     return t

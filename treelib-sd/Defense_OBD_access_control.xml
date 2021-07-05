@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<adtree>
+	<node refinement="conjunctive">
+		<label>AccessToOBDport</label>
+		<node refinement="conjunctive" switchRole="yes">
+			<label>OBDAccessControl</label>
+		</node>
+	</node>
+</adtree>

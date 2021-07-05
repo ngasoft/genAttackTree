@@ -8,6 +8,8 @@ AND = 1
 SAND = 2
 CAN = 3
 ECU = 4
+PRO = 5
+OPP = 6
 
 def getXmlRefinement(n):
     if n==OR:
@@ -37,6 +39,7 @@ class TreeNode:
 
     def __init__(self):
         self.type = ANY
+        self.po_type = ANY # identify the node is of type proponent or opponent
         self.name = ""
         self.params = []
         self.children = []
@@ -44,6 +47,7 @@ class TreeNode:
     def copy(self):
         c = TreeNode()
         c.type = self.type
+        c.po_type = self.po_type
         c.name = self.name
         c.params = [p.copy() for p in self.params]
         c.children = [ch.copy() for ch in self.children]
@@ -150,8 +154,11 @@ class TreeNode:
     def toXml(self):
         root = ET.Element("node")
         root.set("refinement", getXmlRefinement(self.type))
+        if self.po_type==OPP:
+            root.set("switchRole", "yes")
         label = ET.Element("label")
-        label.text = self.name + "(" + ",".join([listToString(p) if isinstance(p, list) else p.toString()  for p in self.params]) + ")"
+        params = "(" + ",".join([listToString(p) if isinstance(p, list) else p.toString()  for p in self.params]) + ")" if self.params else ""
+        label.text = self.name + params
         root.append(label)
         for c in self.children:
             root.append(c.toXml())

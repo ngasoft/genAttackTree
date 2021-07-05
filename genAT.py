@@ -2,9 +2,18 @@ import copy
 import data
 import xml.etree.ElementTree as ET
 
+n = 1
+
+def exportToXml(t, example):
+    global n
+    root = ET.Element("sandtree")
+    root.append(t.toXml())
+    ET.ElementTree(root).write(open("output-" + example + "-" + str(n) + ".xml", "wb"))
+    n += 1
 
 def genAT(library, root, model):
     tree = root.copy()
+    exportToXml(tree, "temp")
 
     while True:
 
@@ -22,12 +31,15 @@ def genAT(library, root, model):
             for (i,assignment) in enumerate(assignments):
                 cleaf = leaf.copy()
                 cleaf.applyAssignment(assignment)
+                if "AccessToOBDport" in cleaf.name:
+                    print("BREAK HERE")
                 (subtree, sub) = findTree(cleaf, library) # find a subtree library that match leaf(assignment) by a substitution
                 if subtree != None:
                     found = True
                     ctree = subtree.copy() # get a copy of the subtree
                     ctree.applyAssignment(sub)
                     leaf.children.append(ctree)
+        exportToXml(tree, "temp")
 
         if not found:
             break
