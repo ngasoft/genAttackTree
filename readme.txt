@@ -3,6 +3,7 @@ Description:
 - main.py: the main script to runs
 - treelib-mini: the template library for the mini example.
 - treelib-full: the template library for the full example.
+- treelib-sd: the template library for the streetdrone example.
 
 
 Dependencies:

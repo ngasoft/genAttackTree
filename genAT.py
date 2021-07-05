@@ -31,8 +31,6 @@ def genAT(library, root, model):
             for (i,assignment) in enumerate(assignments):
                 cleaf = leaf.copy()
                 cleaf.applyAssignment(assignment)
-                if "AccessToOBDport" in cleaf.name:
-                    print("BREAK HERE")
                 (subtree, sub) = findTree(cleaf, library) # find a subtree library that match leaf(assignment) by a substitution
                 if subtree != None:
                     found = True
