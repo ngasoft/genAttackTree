@@ -1,21 +1,10 @@
 <?xml version='1.0'?>
 <adtree>
 	<node refinement="disjunctive">
-		<label>CompromiseSignalsOnCANbus</label>
-		<node refinement="conjunctive">
-			<label>CompromiseECU</label>
-		</node>
-		<node refinement="conjunctive">
-			<label>CompromiseOBD</label>
-		</node>
-		<node refinement="conjunctive">
-			<label>CompromiseGPS</label>
-		</node>
-		<node refinement="conjunctive">
-			<label>CompromiseRADAR</label>
-		</node>
+		<label>Compromise CAN</label>
 		<node refinement="disjunctive" switchRole="yes">
-			<label>CANbusAnomalyDetection</label>
+			<label>CAN BUS
+Anomaly Detection</label>
 		</node>
 	</node>
 </adtree>

@@ -23,7 +23,7 @@ def parseXmlTree(xmlFile, model):
 def parseXmlNode(n, model):
     children = list(n)
     # print("Parsing text : " + children[0].text)
-    t = parseNode(children[0].text, model)
+    t = parseADTNode(children[0].text, model)
     if n.get("refinement")==ORNODE:
         t.type = data.OR
     if n.get("refinement")==ANDNODE:
@@ -50,6 +50,11 @@ def parseNode(text, model):
     nodeListener = NodeListener(node, model)
     walker = ParseTreeWalker()
     walker.walk(nodeListener, tree)
+    return node
+
+def parseADTNode(text, model):
+    node = data.TreeNode()
+    node.name = text
     return node
 
 

@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <adtree>
 	<node refinement="sequential">
-		<label>Compromise USB</label>
+		<label>CompromiseUSB</label>
 		<node refinement="conjunctive">
 			<label>AccessToUSBport</label>
 		</node>

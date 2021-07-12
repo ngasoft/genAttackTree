@@ -1,15 +1,9 @@
 <?xml version='1.0'?>
 <adtree>
 	<node refinement="disjunctive">
-		<label>CompromiseSignalsOnEthernet</label>
-		<node refinement="conjunctive">
-			<label>CompromiseCamera</label>
-		</node>
-		<node refinement="conjunctive">
-			<label>CompromiseLidar</label>
-		</node>
+		<label>Compromise ETHERNET</label>
 		<node refinement="disjunctive" switchRole="yes">
-			<label>OnboardComputerIntrusionDetection</label>
+			<label>Ethernet Access Control</label>
 		</node>
 	</node>
 </adtree>

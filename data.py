@@ -38,8 +38,8 @@ def rdata(n):
 class TreeNode:
 
     def __init__(self):
-        self.type = ANY
-        self.po_type = ANY # identify the node is of type proponent or opponent
+        self.type = OR
+        self.po_type = PRO # identify the node is of type proponent or opponent
         self.name = ""
         self.params = []
         self.children = []
@@ -81,6 +81,13 @@ class TreeNode:
             return leaves
         else:
             return [self]
+
+    def getNodes(self):
+        nodes = [self]
+        if self.children:
+            for c in self.children:
+                nodes += c.getNodes()
+        return nodes
 
     def applyAssignment(self, assignment):
         for i in range(len(self.params)):
