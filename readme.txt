@@ -9,15 +9,11 @@ Dependencies:
 =============
   Mandatory:
   - Python 3 (https://www.python.org)
-  - antlr4-python3-runtime (https://pypi.org/project/antlr4-python3-runtime/)
   Optional
   - Adtool2 (https://satoss.uni.lu/members/piotr/adtool/)
 
 Installation:
 =============
-  - Install all required depenencies:
-    + antlr-python3-runtime can be installed using pip:
-      pip install antlr4-python3-runtime
   - Adtool2 is optional, it can be used to create attack tree templates and to view the output attack tree.
 
 Usage:
