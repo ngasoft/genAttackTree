@@ -16,7 +16,7 @@ def exportToXml(t, example):
     root.append(t.toXml())
     ET.ElementTree(root).write(open("output-" + example + ".xml", "wb"))
 
-def main(example, target):
+def main(example, targets):
     print("Loading input model ...")
     Model = parseModel.parseModel("model-" + example + ".inp")
 
@@ -32,18 +32,17 @@ def main(example, target):
         Library.append(r)
 
 
-    print("Generating attack tree ...")
-    t = genADT.genADT(Model, target,Library)
+    print("Generating attack trees ...")
+    for target in targets:
+        t = genADT.genADT(Model, target,Library)
 
-    print("Tree size: " + str(t.size()))
-    print("Tree height: " + str(t.height()))
+        exportToXml(t, example + "-" + target)
 
-    exportToXml(t, example + "-" + target)
+        print("ADS tree for", target, "is exported")
+        print("Tree size: " + str(t.size()))
+        print("Tree height: " + str(t.height()))
 
-    print("Output exported")
-
-cs = ["OBCOMPUTER","LIDAR", "CAMERA", "GPS", "RADAR", "ECM"] 
-for c in cs:
-    main(SD, c)
+targets = ["OBCOMPUTER","LIDAR", "CAMERA", "GPS", "RADAR", "ECM"] 
+main(SD, targets)
 import cProfile
 
