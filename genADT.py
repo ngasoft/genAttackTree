@@ -27,6 +27,7 @@ def genADT(model, target, library):
             if node.children and node.type != data.OR:
                 cnode = node.copy()
                 cnode.name += " 1"
+                node.type = data.OR
                 node.children = [cnode]
                 for subtree in attackSubTrees:
                     ctree = subtree.copy() # get a copy of the subtree

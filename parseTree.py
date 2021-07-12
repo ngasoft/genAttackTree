@@ -1,8 +1,3 @@
-from antlr4 import *
-from NodeTemplateLexer import NodeTemplateLexer
-from NodeTemplateParser import NodeTemplateParser
-from parseListener import NodeListener as NodeListener
-
 import data
 import xml.etree.ElementTree as ET
 
@@ -40,27 +35,7 @@ def parseXmlNode(n, model):
         t.children.append(parseXmlNode(c, model))
     return t
 
-def parseNode(text, model):
-    lexer = NodeTemplateLexer(InputStream(text))
-    stream = CommonTokenStream(lexer)
-    parser = NodeTemplateParser(stream)
-    tree = parser.tree_node()
-
-    node = data.TreeNode()
-    nodeListener = NodeListener(node, model)
-    walker = ParseTreeWalker()
-    walker.walk(nodeListener, tree)
-    return node
-
 def parseADTNode(text, model):
     node = data.TreeNode()
     node.name = text
     return node
-
-
-# r = parseXmlTree("Attack.xml")
-# r = parseXmlTree("Eavesdrop.xml")
-# r = parseXmlTree("EavesdropFrom.xml")
-# r = parseXmlTree("Compromise.xml")
-# r = parseXmlTree("CompromiseFromTo.xml")
-# r = parseXmlTree("CompromiseFromTo1.xml")

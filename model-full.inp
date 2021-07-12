@@ -1,6 +1,0 @@
-ECM TCU ESC SBW SRS ADS GW OBD2:AP TBOX:AP BCM PEPS AVM # list of all ecus, x:AP indidates that attacker has direct access to x
-CAN1 CAN2 CAN3 CAN4 # list of can buses
-CAN1 ECM TCU ESC SBW SRS GW # each line defines the scope of each can bus
-CAN2 GW ADS
-CAN3 GW OBD2
-CAN4 GW TBOX BCM PEPS AVM
