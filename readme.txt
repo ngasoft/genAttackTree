@@ -1,9 +1,8 @@
 Description:
 ============
-- main.py: the main script to runs
-- treelib-mini: the template library for the mini example.
-- treelib-full: the template library for the full example.
+- mainADT.py: the main script to runs
 - treelib-sd: the template library for the streetdrone example.
+- model-sd.inp: the input system model for the streetdrone example
 
 
 Dependencies:
@@ -24,8 +23,8 @@ Installation:
 Usage:
 ======
 
-The last two lines in the main script main.py indicate which example is used. To run an example, please comment out the other. In particular, to run the mini example, the last line must be commented and the line before that is uncommented. To run the full example, the last line is uncommented while the line before that is uncomment. Then, to execute the script, use run the following command from the command lines
+To execute the script, use run the following command from the command lines
 
-python3 main.py
+python3 mainADT.py
 
-The output tree for the mini example is output-mini.xml, for the full example is output-full.xml. They can be imported in adtool2 for a graphical representation.
+The output trees for the streetdrone example are output-mini-COMPONENT.xml for each COMPONENT from the input model. They can be imported in adtool2 for a graphical representation.
