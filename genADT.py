@@ -15,7 +15,7 @@ def genADT(model, target, library):
 
     # Stage 1: retrieve or build the initial tree
     tree = buildFrameTree(model, target)
-    exportToXml(tree, "temp")
+    #exportToXml(tree, "temp")
 
     # Stage 2: expand the initial tree using templates in the library
     nodes = tree.getNodes()
@@ -48,7 +48,7 @@ def genADT(model, target, library):
                     node.children.append(ctree)
                     nodes.extend(ctree.getNodes())
 
-        exportToXml(tree, "temp")
+        #exportToXml(tree, "temp")
 
 
     return tree
